@@ -1,29 +1,44 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View } from 'react-native'
-import { Images } from '../Themes'
+import { Colors } from '../Themes'
+import { ScrollView, Text, Image, View, Button } from 'react-native'
+import LoginForm from '../Forms/LoginForm'
 
 // Styles
 import styles from './Styles/LaunchScreenStyles'
 
 export default class LaunchScreen extends Component {
-  render () {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: null, // value of current form
+    }
+  }
+
+  _handlePressLogin = () => {
+    // call getValue() to get the values of the form
+    const value = this.refs.form.getValue()
+
+    if (value) { // if validation fails, value will be null
+      const { username, password } = value // value here is an instance of UserCredentials
+      // Login logic : ...
+      // this.props.attemptLogin(username, password)
+    }
+  }
+
+  _onValueChange = (value) => this.setState({ value: value })
+
+  render() {
+
+    const { value } = this.state
+
     return (
-      <View style={styles.mainContainer}>
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
-        <ScrollView style={styles.container}>
-          <View style={styles.centered}>
-            <Image source={Images.launch} style={styles.logo} />
-          </View>
-
-          <View style={styles.section} >
-            <Image source={Images.ready} />
-            <Text style={styles.sectionText}>
-              This probably isn't what your app is going to look like. Unless your designer handed you this screen and, in that case, congrats! You're ready to ship. For everyone else, this is where you'll see a live preview of your fully functioning app using Ignite.
-            </Text>
-          </View>
-
-        </ScrollView>
-      </View>
+      <ScrollView contentContainerStyle={styles.contentContainer} style={styles.container} keyboardShouldPersistTaps='never'>
+        <View style={styles.form}>
+          <LoginForm ref='form' onChange={this._onValueChange} onSubmitEditing={this._handlePressLogin} />
+          <Button title='Login' onPress={this._handlePressLogin} disabled={!value} />
+        </View>
+      </ScrollView>
     )
   }
 }

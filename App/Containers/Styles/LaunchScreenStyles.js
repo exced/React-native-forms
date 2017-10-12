@@ -3,16 +3,24 @@ import { Metrics, ApplicationStyles } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
-  container: {
-    paddingBottom: Metrics.baseMargin
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  logo: {
-    marginTop: Metrics.doubleSection,
-    height: Metrics.images.logo,
-    width: Metrics.images.logo,
-    resizeMode: 'contain'
+  form: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: Metrics.screenWidth * 0.75,
   },
-  centered: {
-    alignItems: 'center'
-  }
+  buttonStyle: {
+    alignSelf: 'center',
+    paddingHorizontal: 20,
+    marginTop: 10,
+    borderRadius: 20,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
 })
