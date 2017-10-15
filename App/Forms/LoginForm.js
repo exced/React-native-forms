@@ -94,5 +94,5 @@ LoginForm.propTypes = {
 
 LoginForm.defaultProps = {
   onChange: () => { },
-  defaultState: null,
+  value: null,
 }
